@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head'); %>
+</head>
+<body>
+    <%- include('../partials/header'); %>
+
+    <h2 class="titulo">Lista de Contactos</h2>
+    <p class="parrafo">Preciona en el nombre del contacto y accederas al detalle del contacto.</p>
+<div class="contenido-contactos">
+    <div class="container-lista">    
+        <ul class="lista">
+            <% contactos.forEach(contacto => { %>  <!--Aca lo que hace es iterar sobre un array de contactos, es donde se alamcenan todos los contactos-->
+                <li class="lista-contactos"> <!--por cada contacto se crea un elemento li-->
+                    <div class="lista-contactos-container">
+                        <span class="inicial">
+                            <%= contacto.nombres.charAt(0) %> <!--Aca con la funcion charAt deja solo la primera letra del nombre-->
+                        </span>
+                        <a href="/contacto/<%= contacto.id %>">  <!--se crea un enlace con los nombres y apellidos del contacto-->
+                            <%= contacto.nombres %> <%= contacto.apellidos %>
+                        </a>
+                        <% if (new Date(contacto.fecha_nacimiento).toLocaleDateString('es-ES', { month: '2-digit', day: '2-digit' }) === new Date().toLocaleDateString('es-ES', { month: '2-digit', day: '2-digit' })) { %>
+                            <span class="contacto-cumple">Estás de cumpleaños, !Felicidades¡</span> <span class="logoTorta"><img src="../pastel.png" alt="pastel"></span> 
+                        <% } %> <!--Comprueba si la fecha de nacimiento del contacto (contacto.fecha_nacimiento) coincide con la fecha actual, solo considerando el mes y el día.-->
+                    </li>
+                <% }) %>
+            </ul>
+        </div>
+    </div>
+
+<footer>
+    <%- include('../partials/footer'); %>
+</footer>
+
+</body>
+</html>

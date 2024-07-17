@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head'); %>
+</head>
+<body>
+    <%- include('../partials/header'); %>
+    <div class="contenido">
+        <h1>Detalle del Contacto</h1>
+        <ul class="grupo-lista">
+            <li><strong>Nombres:</strong> <%= contacto.nombres %></li>
+            <li><strong>Apellidos:</strong> <%= contacto.apellidos %></li>
+            <li><strong>Correo:</strong> <%= contacto.correo %></li>
+            <li><strong>Telefono:</strong> <%= contacto.telefono %></li>
+            <li><strong>Fecha de nacimiento:</strong> <%= contacto.fecha_nacimiento.toISOString().split('T')[0] %></li>
+            <li><strong>Linkedin:</strong> <%= contacto.linkedin %></li> 
+            <li><strong>Parentesco:</strong> <%= contacto.parentesco %></li>
+            
+            <div class="enlaces">
+                <a href="/contactos" class="btn-enlace ">Volver</a>
+                <a href="/editar/<%= contacto.id %>" class="btn-enlace">Editar Contacto</a>
+            </div>
+            <form action="/eliminar/<%= contacto.id %>" method="post" class="contenido-eliminar" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este contacto?');">
+                <button type="submit" class="btn-eliminar">Eliminar Contacto</button>
+            </form>
+        </ul>
+    
+
+    <h2>Relaciones</h2>
+        <ul class="grupo-lista-relaciones">
+            <% relaciones.forEach(rel => { %>
+                <li class="list-group-item">
+                    <%= rel.tipo_relacion %> de <%= rel.relacionado_nombres %> <%= rel.relacionado_apellidos %>
+                    <div class="eliminar-relacion">
+                    <form action="/eliminarRelacion/<%= rel.id %>" method="post" class="contenido-eliminar" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta relación?');">
+                        <button type="submit" class="btn-eliminar">Eliminar relacion</button>
+                        <input type="hidden" name="contacto_id" value="<%= contacto.id %>">
+                    </form>
+                    </div>
+                </li>
+            <% }) %>
+        </ul>
+</div>
+   
+
+<footer>
+    <%- include('../partials/footer'); %>
+</footer>
+
+</body>
+</html>

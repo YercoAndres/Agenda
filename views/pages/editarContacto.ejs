@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head'); %>
+</head>
+<body>
+    <%- include('../partials/header'); %>
+
+    <div class="contenido">
+        <h1>Editar Contacto</h1>
+        <form class="formulario" action="/editar/<%= contacto.id %>" method="post">
+
+            <div class="form">
+                <label for="nombres">Nombres:*</label>
+                <input type="text" id="nombres" name="nombres" required placeholder="Escribe tus nombres" maxlength="35" value="<%= contacto.nombres %>">
+            </div>
+            <div class="form">
+                <label for="apellidos">Apellidos:*</label>
+                <input type="text" id="apellidos" name="apellidos" required placeholder="Escribe tus apellidos" maxlength="35" value="<%= contacto.apellidos %>">
+            </div>
+            <div class="form">
+                <label for="correo">Correo:*</label>
+                <input type="email" id="correo" name="correo" required placeholder="Escribe tu correo" value="<%= contacto.correo %>">
+            </div>
+            <div class="form">
+                <label for="telefono">Telefono:*</label>
+                <input type="number" id="telefono" name="telefono" required placeholder="Escribe tu telefono" oninput="limitarCantDigitos(this, 9)" value="<%= contacto.telefono %>">
+            </div>
+            <div class="form">
+                <label for="fecha_nacimiento">Fecha de Nacimiento:*</label>
+                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required value="<%= contacto.fecha_nacimiento.toISOString().split('T')[0] %>">
+            </div>
+            <div class="form">
+                <label for="linkedin">Linkedin:</label>
+                <input type="text" id="linkedin" name="linkedin"  placeholder="Escribe tu Linkedin" value="<%= contacto.linkedin %>">
+            </div>
+            <div class="form">
+                <label for="parentesco">Tipo de Parentesco:</label>
+                <select class="" id="parentesco" name="parentesco" >
+                    <option value="Ninguna"<%= contacto.parentesco === 'Ninguna' ? 'selected' : ''%>>Ninguna</option>
+                    <option value="Padres"<%= contacto.parentesco === 'Padres' ? 'selected' : ''%>>Padres</option>
+                    <option value="Hermanos"<%= contacto.parentesco === 'Hermanos' ? 'selected' : ''%>>Hermanos</option>
+                    <option value="Tios"<%= contacto.parentesco === 'Tios' ? 'selected' : ''%>>Tios</option>
+                    <option value="Cuñados"<%= contacto.parentesco === 'Cuñados' ? 'selected' : ''%>>Cuñados</option>
+                    <option value="Sobrinos"<%= contacto.parentesco === 'Sobrinos' ? 'selected' : ''%>>Sobrinos</option>
+                    <option value="Hijos"<%= contacto.parentesco === 'Hijos' ? 'selected' : ''%>>Hijos</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-enlace">Guardar Cambios</button>
+            <a href="/contacto/<%= contacto.id %>" class="btn-enlace">Volver</a>
+        </form>
+
+
+        <h2>Agregar Relación</h2>
+        <form class="formulario" action="/agregarRelacion/<%= contacto.id %>" method="post">
+            <div class="form">
+                <label for="relacionado_id">Relacionado:</label>
+                <select class="form-control" id="relacionado_id" name="relacionado_id" required>
+                    <% todosContactos.forEach(contacto => { %>
+                        <option value="<%= contacto.id %>"><%= contacto.nombres %> <%= contacto.apellidos %></option>
+                    <% }) %>
+                </select>
+            </div>
+            <div class="form">
+                <label for="tipo_relacion">Tipo de relación:</label>
+                <input type="text" class="form-control" id="tipo_relacion" name="tipo_relacion" required>
+            </div>
+            <button type="submit" class="btn-enlace">Agregar Relación</button>
+        </form>
+       
+
+    </div>
+
+<footer>
+    <%- include('../partials/footer'); %>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head'); %>
+</head>
+<body>
+    <%- include('../partials/header'); %>
+
+    <!--Contenido de la agenda-->
+<div class="contenido">
+   
+    <form class="formulario" action="/agregar" method="post" onsubmit="return alert('Contacto agregado de forma exitosa.');">
+
+        <p>En esta seccion puedes agregar los contactos que requieras.</p>
+        <h3>Agregar Contactos:</h3>
+        <p class="bold">Los campos que contengan (*) son obligatorios.</p>
+
+    <div class="form">
+        <label for="nombres">Nombres:*</label>
+        <input type="text" id="nombres" name="nombres" required placeholder="Escribe tus nombres" maxlength="35">
+    </div>
+    <div class="form">
+        <label for="apellidos">Apellidos:*</label>
+        <input type="text" id="apellidos" name="apellidos" required placeholder="Escribe tus apellidos" maxlength="35">
+    </div>
+    <div class="form">
+        <label for="correo">Correo:*</label>
+        <input type="email" id="correo" name="correo" required placeholder="Escribe tu correo">
+    </div>
+    <div class="form">
+        <label for="telefono">Telefono:*</label>
+        <input type="number" id="telefono" name="telefono" required placeholder="Escribe tu telefono" oninput="limitarCantDigitos(this, 9)">
+    </div>
+    <div class="form">
+        <label for="fecha_nacimiento">Fecha de Nacimiento:*</label>
+        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required >
+    </div>
+    <div class="form">
+        <label for="linkedin">Linkedin:</label>
+        <input type="text" id="linkedin" name="linkedin"  placeholder="Escribe tu Linkedin">
+    </div>
+    <div class="form">
+        <label for="parentesco">Tipo de Parentesco:</label>
+        <select class="" id="parentesco" name="parentesco" >
+            <option value="Ninguna">Ninguna</option>
+            <option value="Padres">Padres</option>
+            <option value="Hermanos">Hermanos</option>
+            <option value="Tios">Tios</option>
+            <option value="Cuñados">Cuñados</option>
+            <option value="Sobrinos">Sobrinos</option>
+            <option value="Hijos">Hijos</option>
+        </select>
+    </div>
+    <button type="submit" class="btn-enlace">Agregar</button>
+    <a href="/contactos" class="btn-enlace">Ir a contactos</a>
+    </form>
+</div>
+<br><br>
+<footer>
+     <%- include('../partials/footer'); %>
+</footer>
+</body>
+</html>
